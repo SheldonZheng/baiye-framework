@@ -1,4 +1,4 @@
-package com.baiye.Bean;
+package com.baiye.bean;
 
 import java.lang.reflect.Method;
 

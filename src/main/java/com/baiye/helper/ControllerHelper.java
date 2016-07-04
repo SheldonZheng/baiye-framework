@@ -1,7 +1,7 @@
 package com.baiye.helper;
 
-import com.baiye.Bean.Handler;
-import com.baiye.Bean.Request;
+import com.baiye.bean.Handler;
+import com.baiye.bean.Request;
 import com.baiye.annotation.Action;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
