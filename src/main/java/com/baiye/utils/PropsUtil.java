@@ -147,5 +147,40 @@ public class PropsUtil{
         return props;
     }
 
+    public static Properties loadProps(String propsPath)
+    {
+        Properties props = new Properties();
+        InputStream is = null;
+
+        try
+        {
+            if(StringUtils.isEmpty(propsPath))
+                throw new IllegalArgumentException();
+
+            if(propsPath.lastIndexOf(".properties") == -1)
+                propsPath += ".properties";
+
+            is = ClassUtil.getClassLoader().getResourceAsStream(propsPath);
+
+            if(is != null)
+                props.load(is);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if(is != null)
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        return props;
+
+    }
+
 
 }
