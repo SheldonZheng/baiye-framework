@@ -1,9 +1,6 @@
 package com.baiye;
 
-import com.baiye.helper.BeanHelper;
-import com.baiye.helper.ClassHelper;
-import com.baiye.helper.ControllerHelper;
-import com.baiye.helper.IocHelper;
+import com.baiye.helper.*;
 import com.baiye.utils.ClassUtil;
 
 /**
@@ -16,14 +13,34 @@ public final class HelperLoader {
         Class<?>[] classList = {
                 ClassHelper.class,
                 BeanHelper.class,
+                AopHelper.class,
                 IocHelper.class,
                 ControllerHelper.class
         };
-
         for(Class<?> cls : classList)
         {
             ClassUtil.loadClass(cls.getName(),false);
         }
 
+
+        ClassHelper.init();
+        BeanHelper.init();
+        AopHelper.init();
+        IocHelper.init();
+        ControllerHelper.init();
+
+
+        // AopHelper.init();
+       // System.out.println(BeanHelper.getBean(ControllerTest.class).hashCode());
+        //BeanHelper.getBean(ControllerTest.class).test();
+
+    //   System.out.println( BeanHelper.getBeanMap().get(ControllerTest.class).getClass());
+
+       // ControllerTest.test();
     }
+
+    public static void main(String[] args) {
+        init();
+    }
+
 }

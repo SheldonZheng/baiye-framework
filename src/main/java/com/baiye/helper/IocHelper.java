@@ -17,27 +17,32 @@ public final class IocHelper {
     static
     {
         Map<Class<?>,Object> beanMap = BeanHelper.getBeanMap();
-        if(CollectionUtils.isNotEmpty((Collection<?>) beanMap))
-        {
-            for(Map.Entry<Class<?>,Object> beanEntry : beanMap.entrySet())
-            {
-                Class<?> beanClass = beanEntry.getKey();
-                Object beanInstance = beanEntry.getValue();
-                Field[] beanFields = beanClass.getDeclaredFields();
-                if(ArrayUtils.isNotEmpty(beanFields))
-                {
-                    for(Field beanField : beanFields)
-                    {
-                        if(beanField.isAnnotationPresent(Inject.class))
-                        {
-                            Class<?> beanFieldClass = beanField.getType();
-                            Object beanFieldInstance = beanMap.get(beanFieldClass);
-                            if(beanFieldInstance != null)
+
+                                for(Map.Entry<Class<?>,Object> beanEntry : beanMap.entrySet())
+                                {
+                                    Class<?> beanClass = beanEntry.getKey();
+                                    Object beanInstance = beanEntry.getValue();
+                                    Field[] beanFields = beanClass.getDeclaredFields();
+                                    if(ArrayUtils.isNotEmpty(beanFields))
+                                    {
+                                        for(Field beanField : beanFields)
+                                        {
+                                            if(beanField.isAnnotationPresent(Inject.class))
+                                            {
+                                                Class<?> beanFieldClass = beanField.getType();
+                                                Object beanFieldInstance = beanMap.get(beanFieldClass);
+                                                if(beanFieldInstance != null)
                                 ReflectionUtil.setField(beanInstance,beanField,beanFieldInstance);
                         }
-                    }
+                                        }
                 }
             }
-        }
+
     }
+
+    public static void init()
+    {
+        return;
+    }
+
 }

@@ -56,6 +56,11 @@ public final class ControllerHelper {
 
     }
 
+    public static void init()
+    {
+        return;
+    }
+
     public static Handler getHanlder(String requestMethod,String requestPath)
     {
         Request request = new Request(requestMethod,requestPath);

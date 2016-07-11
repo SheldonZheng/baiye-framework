@@ -30,6 +30,7 @@ public final class ClassUtil {
     {
         Class<?> cls = null;
         try {
+          //  System.out.println(className);
             cls = Class.forName(className,isInitialized,getClassLoader());
         } catch (ClassNotFoundException e) {
             LOGGER.error("load class failure",e);

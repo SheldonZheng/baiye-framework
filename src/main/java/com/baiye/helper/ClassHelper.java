@@ -6,6 +6,7 @@ import com.baiye.utils.ClassUtil;
 import com.baiye.utils.ConfigConstant;
 import com.baiye.utils.PropsUtil;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,8 +18,14 @@ public final class ClassHelper {
 
     static
     {
+
         String basePackage = ConfigHelper.getAppBasePackage();
         CLASS_SET = ClassUtil.getClassSet(basePackage);
+    }
+
+    public static void init()
+    {
+        return;
     }
 
     public static Set<Class<?>> getClassSet()
@@ -57,6 +64,44 @@ public final class ClassHelper {
         beanClassSet.addAll(getControllerClassSet());
         return beanClassSet;
     }
+
+
+    public static Set<Class<?>> getClassSetBySuper(Class<?> superClass)
+    {
+        Set<Class<?>> classSet = new HashSet<Class<?>>();
+        for(Class<?> cls : CLASS_SET)
+        {
+            if(superClass.isAssignableFrom(cls) && !superClass.equals(cls))
+                classSet.add(cls);
+        }
+
+        return classSet;
+    }
+
+   /* private static String info = null;
+
+    public static String getInfo()
+    {
+        return info;
+    }*/
+
+    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass)
+    {
+        Set<Class<?>> classSet = new HashSet<Class<?>>();
+        for (Class<?> cls : CLASS_SET) {
+
+            if(cls.isAnnotationPresent(annotationClass))
+            {
+                //info = cls.toString();
+                classSet.add(cls);
+            }
+
+        }
+
+        return classSet;
+        
+    }
+
 
 
 }

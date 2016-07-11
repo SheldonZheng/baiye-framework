@@ -34,7 +34,7 @@ public final class ConfigHelper {
 
     public static String getAppBasePackage()
     {
-        return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.APP_BASE_PACKAGE,"");
+        return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.APP_BASE_PACKAGE,"com.baiye.Test");
     }
 
     public static String getAppJspPath()
@@ -47,5 +47,9 @@ public final class ConfigHelper {
         return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.APP_ASSET_PATH,"/asset/");
     }
 
+    public static void init()
+    {
+        return;
+    }
 
 }
