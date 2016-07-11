@@ -4,6 +4,8 @@ import com.baiye.annotation.Aspect;
 import com.baiye.proxy.AspectProxy;
 import com.baiye.proxy.Proxy;
 import com.baiye.proxy.ProxyManager;
+import com.baiye.utils.ClassUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,17 +32,9 @@ public final class AopHelper {
             for (Map.Entry<Class<?>, List<Proxy>> targetEntry : targetMap.entrySet()) {
                 Class<?> targetClass = targetEntry.getKey();
                 List<Proxy> proxyList = targetEntry.getValue();
-               // info = proxyList.toString();
                 Object proxy = ProxyManager.createProxy(targetClass,proxyList);
 
-              //  info = proxy.toString();
-             //   System.out.println(proxy.hashCode());
-
                 BeanHelper.setBean(targetClass,proxy);
-
-              //  info = targetClass.toString() + ";;;;" + ControllerTest.class.toString();
-
-          //  List<Class<?>> aspectClassList = ClassHelper.getClassSetByAnnotation(Aspect.class);
 
             }
 
@@ -58,13 +52,37 @@ public final class AopHelper {
     private static Set<Class<?>> createTargetClassSet(Aspect aspect) throws Exception
     {
 
-        Set<Class<?>> targetClassSet = new HashSet<Class<?>>();
+        String packageName = aspect.packageName();
+        String className = aspect.className();
         Class<? extends Annotation> annotation = aspect.value();
-        if(annotation != null && !annotation.equals(Aspect.class))
+
+        Set<Class<?>> targetClassSet = new HashSet<Class<?>>();
+
+
+        if(StringUtils.isNotEmpty(packageName))
         {
-            //info = aspect.toString();
-            targetClassSet.addAll(ClassHelper.getClassSetByAnnotation(annotation));
-            //info = ClassHelper.getInfo();
+            if(StringUtils.isNotEmpty(className))
+            {
+                targetClassSet.add(ClassUtil.loadClass(packageName + "." + className,false));
+            }
+            else
+            {
+                if(annotation != null && !annotation.equals(Aspect.class))
+                {
+                    targetClassSet.addAll(ClassHelper.getClassSetByannotation(packageName,annotation));
+                }
+                else
+                {
+                    targetClassSet.addAll(ClassUtil.getClassSet(packageName));
+                }
+            }
+        }
+        else
+        {
+            if(annotation != null && !annotation.equals(Aspect.class))
+            {
+                targetClassSet.addAll(ClassHelper.getClassSetByAnnotation(annotation));
+            }
         }
 
 

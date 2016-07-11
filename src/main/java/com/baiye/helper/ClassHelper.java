@@ -92,7 +92,6 @@ public final class ClassHelper {
 
             if(cls.isAnnotationPresent(annotationClass))
             {
-                //info = cls.toString();
                 classSet.add(cls);
             }
 
@@ -101,6 +100,25 @@ public final class ClassHelper {
         return classSet;
         
     }
+
+
+    public static Set<Class<?>> getClassSetByannotation(String packageName,Class<? extends Annotation> annotationClass)
+    {
+        Set<Class<?>> allClassSet = ClassUtil.getClassSet(packageName);
+        Set<Class<?>> classSet = new HashSet<Class<?>>();
+
+        for (Class<?> cls : allClassSet) {
+
+            if(cls.isAnnotationPresent(annotationClass))
+            {
+                classSet.add(cls);
+            }
+
+        }
+
+        return classSet;
+    }
+
 
 
 

@@ -8,12 +8,11 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Aspect {
-/*
+
 
     String packageName() default "";
 
     String className() default "";
-*/
 
     Class<? extends Annotation> value() default Aspect.class;
 }

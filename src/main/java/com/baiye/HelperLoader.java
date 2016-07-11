@@ -32,7 +32,7 @@ public final class HelperLoader {
 
         // AopHelper.init();
        // System.out.println(BeanHelper.getBean(ControllerTest.class).hashCode());
-        //BeanHelper.getBean(ControllerTest.class).test();
+     //   BeanHelper.getBean(ControllerTest.class).test2();
 
     //   System.out.println( BeanHelper.getBeanMap().get(ControllerTest.class).getClass());
 
