@@ -7,6 +7,7 @@ import com.baiye.bean.View;
 import com.baiye.helper.BeanHelper;
 import com.baiye.helper.ConfigHelper;
 import com.baiye.helper.ControllerHelper;
+import com.baiye.helper.DataContext;
 import com.baiye.utils.CodecUtil;
 import com.baiye.utils.JsonUtil;
 import com.baiye.utils.ReflectionUtil;
@@ -55,6 +56,7 @@ public class DispatcherServlet extends HttpServlet{
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
       //  super.service(req, resp);
+        DataContext.init(req,res);
         String requestMethod = req.getMethod().toLowerCase();
         String requestPath = req.getPathInfo();
 
